@@ -1,0 +1,28 @@
+# 가상환경
+.venv/
+venv/
+env/
+.env
+
+# 파이썬 캐시 및 컴파일된 파일
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 운영체제 파일 
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+*.log
+
+# IDE 및 에디터 설정
+.vscode/
+.idea/
+.project
+.pydevproject
+
+# 데이터 및 임시 파일 
+data/
+temp/
