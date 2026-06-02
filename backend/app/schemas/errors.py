@@ -18,4 +18,15 @@ class ErrorResponse(BaseModel):
         description="실험·디버깅용 상세 정보(로그, 스택 트레이스 등). 생략 가능.",
     )
 
-    
+
+class StructuringException(Exception):
+    """서비스 내부에서 발생하는 도메인 예외 신호."""
+
+    def __init__(self, code: str, message: str, details: str = None):
+        # API 응답용 DTO를 미리 생성하여 품고 있습니다.
+        self.error_response = ErrorResponse(
+            code=code, 
+            message=message, 
+            details=details
+        )
+        super().__init__(message)
