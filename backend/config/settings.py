@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # 환경 변수명만 명시 (OS 환경변수나 .env에서 읽음)
     GEMINI_API_KEY: str
+    DEFAULT_MODEL: str = "gemini-2.5-flash"
 
     DEFAULT_OUTPUT_FORMAT: str = "markdown"
     DEFAULT_PROMPT_VERSION: int = 1
