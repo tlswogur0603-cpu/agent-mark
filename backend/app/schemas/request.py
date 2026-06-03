@@ -25,21 +25,14 @@ class StructureRequest(BaseModel):
 
     model_config = ConfigDict(
         json_schema_extra={
-            "examples": [
-                {
-                    "raw_text": (
-                        "지난 분기 회의에서 신규 온보딩 플로우 도입과 "
-                        "고객 지원 SLA 24시간 대응 개선이 결정되었다."
-                    ),
-                    "output_format": "markdown",
-                    "prompt_version": None,
-                },
-                {
-                    "raw_text": "제품 로드맵 Q3~Q4 우선순위 및 리스크 요약 초안...",
-                    "output_format": "table",
-                    "prompt_version": 2,
-                },
-            ],
+            "example": {
+                "raw_text": (
+                    "지난 분기 회의에서 신규 온보딩 플로우 도입과 "
+                    "고객 지원 SLA 24시간 대응 개선이 결정되었다."
+                ),
+                "output_format": "markdown",
+                "prompt_version": 1,
+            },
         },
     )
 
