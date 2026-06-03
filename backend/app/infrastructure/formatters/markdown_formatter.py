@@ -1,4 +1,5 @@
 from app.schemas.response import StructuredResult
+from app.ports.formatter_port import FormatType
 
 
 class MarkdownFormatter:
@@ -26,3 +27,15 @@ class MarkdownFormatter:
         if not items:
             return "없음"
         return "\n".join(f"- {item}" for item in items)
+
+
+class MarkdownFormatterAdapter:
+    def __init__(self, formatter: MarkdownFormatter):
+        self._formatter = formatter
+
+    async def render(self, result: StructuredResult, format_type: FormatType) -> str:
+        
+        if format_type != FormatType.MARKDOWN:
+            raise NotImplementedError(f"지원하지 않는 포맷입니다: {format_type.value}")
+
+        return self._formatter.format(result)
