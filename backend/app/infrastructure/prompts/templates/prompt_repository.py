@@ -1,6 +1,7 @@
 import os
 import aiofiles
 from app.ports.prompt_port import PromptPort
+from app.schemas.errors import StructuringException
 
 
 class PromptRepository(PromptPort):
@@ -9,4 +10,12 @@ class PromptRepository(PromptPort):
         path = os.path.join(base_dir, f"v{prompt_version}.txt")
 
         async with aiofiles.open(path, mode="r", encoding="utf-8") as f:
-            return await f.read()
+            content = await f.read()
+
+            if not content.strip():
+                raise StructuringException(
+                    code="PROMPT_LOAD_FAILURE", 
+                    message=f"프롬프트 내용이 비어있습니다: v{prompt_version}.txt"
+                )
+                
+            return content
