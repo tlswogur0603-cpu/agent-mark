@@ -10,7 +10,7 @@ app = FastAPI(title="AgentMark API", version="0.1.0")
 async def structuring_exception_handler(request: Request, exc: StructuringException):
 
     return JSONResponse(
-        status_code=400,
+        status_code=exc.status_code,
         content=exc.error_response.model_dump()
     )
 

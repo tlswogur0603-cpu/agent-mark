@@ -22,8 +22,17 @@ class ErrorResponse(BaseModel):
 class StructuringException(Exception):
     """서비스 내부에서 발생하는 도메인 예외 신호."""
 
-    def __init__(self, code: str, message: str, details: str = None):
+    STATUS_MAP = {
+        "VALIDATION_ERROR": 400,
+        "LLM_INFERENCE_FAILURE": 502,
+        "UNSUPPORTED_FORMAT": 501,
+        "FORMATTING_FAILURE": 500,
+        "PROMPT_LOAD_FAILURE": 500,
+    }
+
+    def __init__(self, code: str, message: str, details: str = None, status_code: int = None):
         # API 응답용 DTO를 미리 생성하여 품고 있습니다.
+        self.status_code = status_code or self.STATUS_MAP.get(code, 400)
         self.error_response = ErrorResponse(
             code=code, 
             message=message, 
