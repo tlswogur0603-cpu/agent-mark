@@ -50,6 +50,13 @@ class StructuringOrchestrator:
 
         try:
             formatted_body = await self._formatter.render(result, format_type)
+        except NotImplementedError as exc:
+            self._raise_wrapped(
+                "UNSUPPORTED_FORMAT",
+                str(exc),
+                exc,
+            )
+
         except Exception as exc:
             self._raise_wrapped(
                 "FORMATTING_FAILURE",
