@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-
 from config.settings import settings
 from app.container import get_orchestrator
 from app.ports.formatter_port import FormatType
@@ -27,11 +26,7 @@ async def structure(
             details=str(exc),
         ) from exc
 
-    prompt_version = (
-        request.prompt_version
-        if request.prompt_version is not None
-        else settings.DEFAULT_PROMPT_VERSION
-    )
+    prompt_version = request.prompt_version or settings.DEFAULT_PROMPT_VERSION
 
     return await orchestrator.execute(
         text=request.raw_text,
